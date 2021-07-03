@@ -45,3 +45,8 @@ def delete_car(request, id):
 def show_car_by_id(request, id):
     car = get_object_or_404(Car, pk=id)
     return render(request, 'car_details.html', {'car': car})
+
+
+def show_car_by_plate(request, registration_number):
+    car = get_object_or_404(Car, registration_number=registration_number)
+    return render(request, 'car_details.html', {'car': car})
