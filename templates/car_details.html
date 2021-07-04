@@ -27,8 +27,13 @@
                   <dd class="col-sm-6">{{ car.mileage }}</dd>
               </dl>
           </div>
-            <a href="{% url 'delete_car' car.id %}" class="btn btn-primary">
-                                Back <i class="fas fa-arrow-alt-circle-left"></i></a>
+            {% if remove %}
+                <a href="{% url 'delete_car' car.id %}" class="btn btn-primary">
+                                    Back <i class="fas fa-arrow-alt-circle-left"></i></a>
+            {% else %}
+                <a href="{% url 'all_cars' %}" class="btn btn-primary">
+                                    Back <i class="fas fa-arrow-alt-circle-left"></i></a>
+            {% endif %}
         </div>
 
 {% endblock %}

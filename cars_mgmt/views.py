@@ -48,10 +48,10 @@ def delete_car(request, id):
         car.delete()
         return redirect(show_all_cars)
 
-    return render(request, template_name, {'car': car})
+    return render(request, template_name, {'car': car, 'remove': False})
 
 
 @login_required
 def show_car_by_plate(request, registration_number):
     car = get_object_or_404(Car, registration_number=registration_number)
-    return render(request, 'car_details.html', {'car': car})
+    return render(request, 'car_details.html', {'car': car, 'remove': True})
