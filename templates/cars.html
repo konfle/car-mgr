@@ -1,20 +1,64 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<a href="{% url 'new_car' %}">New</a>
-{% for car in cars%}
-<h4>{{ car.brand }} {{ car.model }} {{ car. }}</h4>
-<a href="{% url 'edit_car' car.id %}">Edit</a>
-<a href="{% url 'delete_car' car.id %}">Delete</a>
-<a href="{% url 'show_car' car.id %}">Detail</a>
-{% endfor %}
+{% extends 'main.html' %}
 
-</body>
-</html>
+{% block title %} List Of Cars {% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+            <h1 class="display-4"> Welcome, {{ user.username }}</h1>
+                <a href="{% url 'logout' %}" class="btn btn-success">Logout <i class="fas fa-sign-out-alt"></i></a>
+        {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success">Login <i class="fas fa-sign-in-alt"></i></a>
+        {% endif %}
+    </div>
+<hr>
+    <div>
+        {% if user.is_authenticated %}
+        <br>
+            <a href="{% url 'new_car' %}">New <i class="fas fa-plus-circle"></i></a>
+        {% endif %}
+    </div>
+
+
+    {% for car in cars%}
+        <div class="card" style="width: 22rem;">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-9">
+                      <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                  </div>
+                  <div class="col-3">
+                      {% if user.is_authenticated %}
+                            <a href="{% url 'edit_car' car.id %}"><i class="fas fa-edit"></i></a>
+                            <a href="{% url 'delete_car' car.id %}"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{% url 'show_car' car.id %}"><i class="fas fa-info-circle"></i></a>
+                        {% else %}
+                            <a href="{% url 'show_car' car.id %}"><i class="fas fa-info-circle"></i></a>
+                      {% endif %}
+                  </div>
+              </div>
+
+              <dl class="row">
+                  <dt class="col-sm-6">Plates:</dt>
+                  <dd class="col-sm-6">{{ car.registration_number }}</dd>
+
+                  <dt class="col-sm-6">Production year:</dt>
+                  <dd class="col-sm-6">{{ car.year_of_production }}</dd>
+
+                  <dt class="col-sm-6">Fuel type:</dt>
+                  <dd class="col-sm-6">{{ car.fuel_type }}</dd>
+
+                  <dt class="col-sm-6">Mileage:</dt>
+                  <dd class="col-sm-6">{{ car.mileage }}</dd>
+              </dl>
+          </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+              <div class="row">
+                   <h6 class="card-subtitle mb-2 text-muted">{{ car.brand }} {{ car.model }}</h6>
+                   <p class="card-text">ADD here rest info about CAR!</p>
+              </div>

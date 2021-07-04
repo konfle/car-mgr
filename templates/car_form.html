@@ -1,18 +1,38 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form_car }}
-        <button type="submit" class="btn btn-primary">Add car</button>
-    </form>
-    <a href="{% url 'all_cars' %}">Back</a>
-</body>
-</html>
+{% extends 'main.html' %}
+{% load bootstrap %}
+
+{% block title %}
+    {% if new %}
+        New Car Form
+    {% else %}
+        Edit Car Form
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="card" style="width: 22rem;">
+      <div class="card-body">
+          {% if new %}
+            <h5 class="card-title">New Car Form</h5>
+          {% else %}
+            <h5 class="card-title">Edit Car Form</h5>
+          {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form_car|bootstrap }}
+                <br>
+                {% if new %}
+                    <a href="{% url 'all_cars' %}" class="btn btn-primary">
+                        Back <i class="fas fa-arrow-alt-circle-left"></i></a>
+                    <button type="submit" class="btn btn-success">Add New Car <i class="fas fa-sign-in-alt"></i></button>
+                {% else %}
+                    <a href="{% url 'all_cars' %}" class="btn btn-primary">
+                    Back <i class="fas fa-arrow-alt-circle-left"></i></a>
+                    <button type="submit" class="btn btn-success">Edit Car <i class="fas fa-sign-in-alt"></i></button>
+                {% endif %}
+            </form>
+      </div>
+    </div>
+
+{% endblock %}

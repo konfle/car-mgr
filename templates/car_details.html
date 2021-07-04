@@ -1,18 +1,33 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h4>{{ car.brand }} - {{ car.model }}</h4>
-        <p>{{ car.year_of_production }}</p>
-        <p>{{ car.fuel_type }}</p>
-        <p>{{ car.mileage }}</p>
-        <p>{{ car.registration_number }}</p>
-        <a href="{% url 'all_cars' %}">Back</a>
-</body>
-</html>
+{% extends 'main.html' %}
+
+{% block title %} Car Details {% endblock %}
+
+{% block body %}
+
+    <div class="card" style="width: 22rem;">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-9">
+                      <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                  </div>
+              </div>
+
+              <dl class="row">
+                  <dt class="col-sm-6">Plates:</dt>
+                  <dd class="col-sm-6">{{ car.registration_number }}</dd>
+
+                  <dt class="col-sm-6">Production year:</dt>
+                  <dd class="col-sm-6">{{ car.year_of_production }}</dd>
+
+                  <dt class="col-sm-6">Fuel type:</dt>
+                  <dd class="col-sm-6">{{ car.fuel_type }}</dd>
+
+                  <dt class="col-sm-6">Mileage:</dt>
+                  <dd class="col-sm-6">{{ car.mileage }}</dd>
+              </dl>
+          </div>
+            <a href="{% url 'delete_car' car.id %}" class="btn btn-primary">
+                                Back <i class="fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+
+{% endblock %}

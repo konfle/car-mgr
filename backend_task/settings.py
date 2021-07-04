@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'bootstrapform',
     'cars_mgmt',
 ]
 
@@ -120,6 +121,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ['static']
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'all_cars'
+LOGOUT_REDIRECT_URL = 'all_cars'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
