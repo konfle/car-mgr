@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load bootstrap %}
 
 {% block title %} List Of Cars {% endblock %}
 
@@ -13,13 +14,13 @@
         {% endif %}
     </div>
 <hr>
+
     <div>
         {% if user.is_authenticated %}
         <br>
             <a href="{% url 'new_car' %}">New <i class="fas fa-plus-circle"></i></a>
         {% endif %}
     </div>
-
 
     {% for car in cars%}
         <div class="card" style="width: 22rem;">
@@ -54,11 +55,6 @@
               </dl>
           </div>
         </div>
+</div>
     {% endfor %}
-
 {% endblock %}
-
-              <div class="row">
-                   <h6 class="card-subtitle mb-2 text-muted">{{ car.brand }} {{ car.model }}</h6>
-                   <p class="card-text">ADD here rest info about CAR!</p>
-              </div>

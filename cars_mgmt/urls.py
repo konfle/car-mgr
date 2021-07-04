@@ -5,7 +5,7 @@ from .router import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('all/', show_all_cars, name="all_cars"),
+    path('', show_all_cars, name="all_cars"),
     path('new/', new_car, name="new_car"),
     path('edit/<int:id>', edit_car, name="edit_car"),
     path('delete/<int:id>', delete_car, name="delete_car"),
